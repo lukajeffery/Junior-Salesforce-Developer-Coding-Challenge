@@ -22,8 +22,8 @@ When a `Contact` is created using `createContact()`, the following happens:
 The `setMainContact()` method selects the contact with the highest position:
 ``` apex
  // Set the main contact based on position and seniority
-    public static void setMainContact(Account acct) {
-        if (acct.contacts.isEmpty()) return;
+    public static void setMainContact(Account acc) {
+        if (acc.contacts.isEmpty()) return;
         Map<String, Integer> positionRank = new Map<String, Integer>{ // Creating a map to rank positions
             'CEO' => 1,
             'Operational Manager' => 2,
@@ -31,8 +31,8 @@ The `setMainContact()` method selects the contact with the highest position:
             'Administrative' => 4
         };
     
-        Contact main = acct.contacts[0];
-        for (Contact c : acct.contacts) {
+        Contact main = acc.contacts[0];
+        for (Contact c : acc.contacts) {
             Boolean isHigher = false;
             if (positionRank.get(c.position) < positionRank.get(main.position)) { // Check if the current contact's position is higher
                 isHigher = true;
@@ -46,7 +46,7 @@ The `setMainContact()` method selects the contact with the highest position:
             }
         }
 
-        acct.mainContact = main.id; 
+        acc.mainContact = main.id; 
     }
 ```
 - The position is a set hierarchy ( CEO > Operational Manager > Finance > Administrative )
