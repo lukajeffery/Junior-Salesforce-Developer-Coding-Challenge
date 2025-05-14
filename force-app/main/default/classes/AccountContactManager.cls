@@ -29,8 +29,8 @@ public with sharing class AccountContactManager {
     }
 
     // Set the main contact based on position and seniority
-    public static void setMainContact(Account acct) {
-        if (acct.contacts.isEmpty()) return;
+    public static void setMainContact(Account acc) {
+        if (acc.contacts.isEmpty()) return;
         Map<String, Integer> positionRank = new Map<String, Integer>{ // Creating a map to rank positions
             'CEO' => 1,
             'Operational Manager' => 2,
@@ -38,8 +38,8 @@ public with sharing class AccountContactManager {
             'Administrative' => 4
         };
     
-        Contact main = acct.contacts[0];
-        for (Contact c : acct.contacts) {
+        Contact main = acc.contacts[0];
+        for (Contact c : acc.contacts) {
             Boolean isHigher = false;
             if (positionRank.get(c.position) < positionRank.get(main.position)) { // Check if the current contact's position is higher
                 isHigher = true;
@@ -53,6 +53,6 @@ public with sharing class AccountContactManager {
             }
         }
 
-        acct.mainContact = main.id; 
+        acc.mainContact = main.id; 
     }
 }
