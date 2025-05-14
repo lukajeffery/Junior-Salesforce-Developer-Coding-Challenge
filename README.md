@@ -101,7 +101,7 @@ This section explains why I have opted for one implementation over another.
      ```
     IF(
         Total_Number_Of_Contacts__c > 0,
-        Finance_Contacts__c / Total_Number_Of_Contacts__c,
+        (Finance_Contacts__c / Total_Number_Of_Contacts__c) * 100,
         0
     )
     ```
