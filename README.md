@@ -92,3 +92,19 @@ This section explains why I have opted for one implementation over another.
   ```
   In the test class, contact IDs are assigned manually rather than using real Salesforce record IDs. This is also done for simplicity, so that no actual records need to be added to a database to test the code.
 
+# Salesforce Questions
+1) Disregarding the standard Salesforce data model, should the Account-Contact relationship be a lookup or a master-detail and why?
+   
+   A master-detail relationship should be used. This ensures that a contact cannot exist without an account, and that if an account is deleted, all of its contacts are also deleted. This prevents orphaned records, which may happen with a lookup relationship.
+
+2) Write a Salesforce formula for the “Percentage of Finance Employees” field on an Account which calculates the number of employees with the Finance position in comparison with the Total Number Of Contacts.
+     ```
+    IF(
+        Total_Number_Of_Contacts__c > 0,
+        Finance_Contacts__c / Total_Number_Of_Contacts__c,
+        0
+    )
+    ```
+3) Instead of incrementing the total fields on the Account, how else could this be achieved in Salesforce?
+
+    A roll-up summary field could be used, which could be created as an additional field added to the Account object that can count the number of child Contact records.
